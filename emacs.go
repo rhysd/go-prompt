@@ -110,7 +110,10 @@ var emacsKeyBindings = []KeyBind{
 	{
 		Key: ControlL,
 		Fn: func(buf *Buffer) {
-			out := NewStandardOutputWriter()
+			out, err := NewStandardOutputWriter()
+			if err != nil {
+				return
+			}
 			out.EraseScreen()
 			out.CursorGoTo(0, 0)
 			out.Flush()
